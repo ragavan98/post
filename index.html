@@ -1,0 +1,105 @@
+<html ng-app="contactModule">
+
+<head>
+    <title>Contact App</title>
+
+    <head>
+        <h1 style="color:blue;" style="font-family:courier;">Contact App</h1>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+            crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+            crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+            crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.js"></script>
+        <script src="contact_app.js"></script>
+        <script src="AppConfig.service.js"></script>
+        <script src="appname.service.js"></script>
+        <script src="contact.controller.js"></script>
+        <script src="contactdata.service.js"></script>
+    </head>
+
+    <body>
+        <div class="container" ng-controller="contactController as cntrl">
+            <div class="row">
+                <ul class="col-md-6">
+                    <li class="list-group-item" ng-repeat="contact in cntrl.contacts " ng-click="cntrl.setContacts($index)">
+                        <span>{{ contact.name.first + " " +contact.name.last }}</span>
+                    </li>
+                    <br />
+                    <button ng-click="cntrl.addContact()">Add New Contact</button>
+                </ul>
+
+                
+                <div class="col-md-6">
+                    <div class="col-md-6">
+                        <div class="alert alert-success" ng-if="cntrl.successMessage">{{cntrl.successMessage}}</div>
+                        <div class="alert alert-danger" ng-if="cntrl.errorMessage">{{cntrl.errorMessage}}</div>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img ng-src="{{cntrl.selectContacts.picture.medium }}"></img>
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <button ng-hide="cntrl.editMode" ng-click="cntrl.toggleEditMode()">Edit</button>
+                                <button ng-show="cntrl.editMode" ng-click="cntrl.saveUser()">Save</button>
+
+                                <p>
+                                    <h6 style="font-family:'Times New Roman', Times, serif ">Name</h6>
+                                </p>
+                                <p>
+                                    <span style="color: red">First Name</span>
+                                    <span ng-hide="cntrl.editMode">{{ cntrl.selectContacts.name.first}}</span>
+                                    <input type="text" ng-show="cntrl.editMode" ng-model="cntrl.selectContacts.name.first">
+                                </p>
+
+                                <p>
+                                    <span style="color: red">Last Name</span>
+                                    <span ng-hide="cntrl.editMode">{{ cntrl.selectContacts.name.last}}</span>
+                                    <input type="text" ng-show="cntrl.editMode" ng-model="cntrl.selectContacts.name.last">
+                                </p>
+
+                                <div>
+                                    <p>
+                                        <h6 style="font-family:'Times New Roman', Times, serif ">Location </h6>
+                                    </p>
+                                    <p>
+                                        <span style="color: red">Street</span>
+                                        <span ng-hide="cntrl.editMode">{{ cntrl.selectContacts.location.street}}</span>
+                                        <input type="text" ng-show="cntrl.editMode" ng-model="cntrl.selectContacts.location.street">
+                                    </p>
+                                    <p>
+                                        <span style="color: red">City</span>
+                                        <span ng-hide="cntrl.editMode">{{ cntrl.selectContacts.location.city}}</span>
+                                        <input type="text" ng-show="cntrl.editMode" ng-model="cntrl.selectContacts.location.city">
+                                    </p>
+                                    <p>
+                                        <span style="color: red">State</span>
+                                        <span ng-hide="cntrl.editMode">{{ cntrl.selectContacts.location.state}}</span>
+                                        <input type="text" ng-show="cntrl.editMode" ng-model="cntrl.selectContacts.location.state">
+                                    </p>
+                                </div>
+                                <div>
+                                    <p>
+                                        <h6 style="font-family:'Times New Roman', Times, serif ">Phone</h6>
+                                    </p>
+                                    <p>
+                                        <span style="color: red">Cell</span>
+                                        <span ng-hide="cntrl.editMode">{{ cntrl.selectContacts.cell}}</span>
+                                        <input type="text" ng-show="cntrl.editMode" ng-model="cntrl.selectContacts.cell">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
